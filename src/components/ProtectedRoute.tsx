@@ -11,7 +11,7 @@ function ProtectedRoute({ children }: ProtectedRouteProps) {
   const loggedUser = useSelector((state: RootState) => state.user.userLogged);
 
   if (!loggedUser) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/login" />;
   }
   return children ? children : <Outlet />;
 }

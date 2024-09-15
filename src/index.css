@@ -3,5 +3,19 @@
 @tailwind utilities;
 
 .content-area {
-  height: calc(100vh - 80px);
+  height: calc(100vh - 40px);
+}
+
+th,
+td {
+  border: 1px solid rgb(160 160 160);
+  padding: 8px 10px;
+}
+
+td:last-of-type {
+  text-align: center;
+}
+
+tbody > tr:nth-of-type(even) {
+  background-color: rgb(237 238 242);
 }

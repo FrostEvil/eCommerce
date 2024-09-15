@@ -8,12 +8,25 @@ interface LoginProps {
   password: string;
 }
 
-const useLogin = ({ email, password }: LoginProps) => {
+function useLogin({ email, password }: LoginProps) {
   const dispatch = useDispatch();
 
-  const { data } = useQuery({ queryKey: ["users"], queryFn: getUsers });
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["users"],
+    queryFn: getUsers,
+  });
 
   const foundedUser = data?.find((user) => user.email === email);
+
+  if (isLoading === true)
+    return {
+      message: "Is loading",
+    };
+  if (error) {
+    return {
+      message: "Error!",
+    };
+  }
 
   if (!foundedUser) {
     return {
@@ -29,8 +42,9 @@ const useLogin = ({ email, password }: LoginProps) => {
 
   dispatch(login(foundedUser));
   return {
+    status: true,
     message: "User logged in",
   };
-};
+}
 
 export default useLogin;

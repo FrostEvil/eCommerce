@@ -1,12 +1,19 @@
 import LoginForm from "../components/LoginForm";
 
+import LoggedUser from "../components/LoggedUser";
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
+
 function LoginPage() {
+  const loggedUser = useSelector((state: RootState) => state.user.userLogged);
+
+  // const [isLogin, setIsLogin] = useState<boolean>(false);
+  // console.log(isLogin);
+
   return (
     <div className="content-area flex flex-col  items-center">
-      <h2 className=" mt-16 font-semibold text-2xl">
-        Login to see our products!
-      </h2>
-      <LoginForm />
+      {/* {isLogin ? <LoggedUser /> : <LoginForm setIsLogin={setIsLogin} />} */}
+      {loggedUser?.id ? <LoggedUser /> : <LoginForm />}
     </div>
   );
 }
