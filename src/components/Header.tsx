@@ -1,6 +1,9 @@
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
 import { Link } from "react-router-dom";
-
 function Header() {
+  const loggedUser = useSelector((state: RootState) => state.user.userLogged);
+
   return (
     <header className="h-10 bg-secondary w-full text-white font-sans ">
       <div className="container mx-auto px-4 h-full flex justify-end">
@@ -13,7 +16,9 @@ function Header() {
               <Link to="/products">Products</Link>
             </li>
             <li className="duration-300 hover:text-hover">
-              <Link to="/login">Login</Link>
+              <Link to="/login">
+                {loggedUser?.id ? loggedUser?.username : "Login"}
+              </Link>
             </li>
           </ul>
         </nav>
