@@ -7,12 +7,8 @@ import { RootState } from "../store";
 function LoginPage() {
   const loggedUser = useSelector((state: RootState) => state.user.userLogged);
 
-  // const [isLogin, setIsLogin] = useState<boolean>(false);
-  // console.log(isLogin);
-
   return (
     <div className="content-area flex flex-col  items-center">
-      {/* {isLogin ? <LoggedUser /> : <LoginForm setIsLogin={setIsLogin} />} */}
       {loggedUser?.id ? <LoggedUser /> : <LoginForm />}
     </div>
   );

@@ -8,7 +8,7 @@ interface LoginProps {
   password: string;
 }
 
-function useLogin({ email, password }: LoginProps) {
+function useLogin() {
   const dispatch = useDispatch();
 
   const { isLoading, error, data } = useQuery({
@@ -16,34 +16,39 @@ function useLogin({ email, password }: LoginProps) {
     queryFn: getUsers,
   });
 
-  const foundedUser = data?.find((user) => user.email === email);
+  const loginUser = ({ email, password }: LoginProps) => {
+    const foundedUser = data?.find((user) => user.email === email);
 
-  if (isLoading === true)
-    return {
-      message: "Is loading",
-    };
-  if (error) {
-    return {
-      message: "Error!",
-    };
-  }
+    if (isLoading === true)
+      return {
+        message: "Is loading",
+      };
+    if (error) {
+      return {
+        message: "Error!",
+      };
+    }
 
-  if (!foundedUser) {
-    return {
-      message: "User not found",
-    };
-  }
+    if (!foundedUser) {
+      return {
+        message: "User not found",
+      };
+    }
 
-  if (foundedUser.password !== password) {
-    return {
-      message: "Incorrect password",
-    };
-  }
+    if (foundedUser.password !== password) {
+      return {
+        message: "Incorrect password",
+      };
+    }
 
-  dispatch(login(foundedUser));
+    dispatch(login(foundedUser));
+    return {
+      message: "User logged in",
+    };
+  };
+
   return {
-    status: true,
-    message: "User logged in",
+    loginUser,
   };
 }
 

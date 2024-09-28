@@ -17,7 +17,7 @@ export default {
       green: "#13ce66",
       "green-hover": "#0fa552",
       yellow: "#ffc82c",
-      white: "#dddddd",
+      white: "#ffffff",
       black: "#222222",
       primary: "#2a9d8f",
       secondary: "#1A2F38",

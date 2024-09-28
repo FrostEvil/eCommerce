@@ -1,6 +1,6 @@
 import axios from "axios";
 import { API_URL } from "../constants";
-import { User } from "../store/types";
+import { User } from "../types";
 
 const getUsers = async () => {
   try {

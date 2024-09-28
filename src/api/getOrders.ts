@@ -1,18 +1,16 @@
 import axios from "axios";
 import { API_URL } from "../constants";
-import { GetApiProducts } from "../types";
 
-const getProducts = async (page: number): Promise<GetApiProducts> => {
+const getOrders = async (page: number) => {
   try {
     const response = await axios.get(
-      `${API_URL}/products?_page=${page}&_per_page=5`,
+      `${API_URL}/orders?_page=${page}&_per_page=3`,
       {
         params: {
           page: "_page",
         },
       }
     );
-
     return {
       products: response.data.data,
       nextPage: response.data.next
@@ -24,8 +22,7 @@ const getProducts = async (page: number): Promise<GetApiProducts> => {
     };
   } catch (error) {
     console.log("Error", error);
-    throw error;
   }
 };
 
-export default getProducts;
+export default getOrders;

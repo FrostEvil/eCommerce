@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { User } from "./types";
+import { User } from "../types";
 
 interface UserLogged {
   userLogged: User | null;

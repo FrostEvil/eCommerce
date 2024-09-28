@@ -2,8 +2,6 @@ import FormInput from "./FormInput";
 import { Formik, Form, FormikProps } from "formik";
 import { basicSchema } from "../schemas/basicSchema";
 import useLogin from "../hooks/useLogin";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 interface LoginProps {
   email: string;
@@ -13,31 +11,9 @@ interface LoginProps {
 interface OtherProps {
   isSubmitting: boolean;
 }
-// interface SetIsLoginProps {
-//   setIsLogin: Dispatch<SetStateAction<boolean>>;
-// }
 
 function LoginForm() {
-  const navigate = useNavigate();
-  const [loginData, setLoginData] = useState<LoginProps>({
-    email: "",
-    password: "",
-  });
-
-  const loginStatus: { message: string; status?: boolean } =
-    useLogin(loginData);
-
-  if (loginStatus.status === true) {
-    navigate(-1);
-  }
-
-  // useEffect(() => {
-  //   if (loginStatus.status) {
-  //     setIsLogin(true);
-  //   } else {
-  //     setIsLogin(false);
-  //   }
-  // }, [loginStatus.message]);
+  const { loginUser } = useLogin();
 
   const initalValues: LoginProps = {
     email: "",
@@ -47,19 +23,12 @@ function LoginForm() {
   return (
     <div className="mt-20 p-10 bg-primary rounded-xl">
       <h2>Please enter your e-mail and password:</h2>
-      {loginData.email && (
-        <p
-          className={"mt-2 " + (loginStatus.status ? "text-green" : "text-red")}
-        >
-          {loginStatus.message}
-        </p>
-      )}
       <Formik
         initialValues={initalValues}
         validationSchema={basicSchema}
         onSubmit={(values, actions) => {
+          loginUser(values);
           actions.resetForm();
-          setLoginData(values);
         }}
       >
         {(props: OtherProps & FormikProps<LoginProps>) => (

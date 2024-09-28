@@ -9,8 +9,11 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import ProductsPage from "./pages/ProductsPage";
 import { store } from "./store";
-import ProtectedRoute from "./components/ProtectedRoute";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import NewOrderPage from "./pages/NewOrderPage";
+import SalesPage from "./pages/SalesPage";
+import OrdersPage from "./pages/OrdersPage";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
 const el = document.getElementById("root");
@@ -44,6 +47,30 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <ProductsPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/orders/new",
+        element: (
+          <ProtectedRoute>
+            <NewOrderPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/sales",
+        element: (
+          <ProtectedRoute notAllowed={["User", "Employee"]}>
+            <SalesPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/orders",
+        element: (
+          <ProtectedRoute notAllowed={["User"]}>
+            <OrdersPage />
           </ProtectedRoute>
         ),
       },
